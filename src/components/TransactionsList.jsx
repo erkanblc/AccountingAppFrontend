@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function TransactionsList() {
   const [transactions, setTransactions] = useState([]);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     fetchTransactions();
@@ -18,7 +20,11 @@ function TransactionsList() {
       fetch(`http://localhost:8080/api/transactions/${id}`, {
         method: 'DELETE'
       })
-        .then(() => fetchTransactions())
+        .then(() => {
+          fetchTransactions();
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 3000);
+        })
         .catch(err => alert("Silme hatası: " + err));
     }
   };
@@ -26,6 +32,22 @@ function TransactionsList() {
   return (
     <div>
       <h2>Tüm İşlemler</h2>
+
+      {/* Toast mesajı */}
+      <div
+        className={`toast-container position-fixed bottom-0 end-0 p-3`}
+        style={{ zIndex: 9999 }}
+      >
+        <div
+          className={`toast align-items-center text-bg-success border-0 ${showToast ? 'show' : 'hide'}`}
+          role="alert"
+        >
+          <div className="d-flex">
+            <div className="toast-body">İşlem başarıyla silindi.</div>
+          </div>
+        </div>
+      </div>
+
       <table className="table table-striped table-bordered mt-3">
         <thead className="table-dark">
           <tr>
