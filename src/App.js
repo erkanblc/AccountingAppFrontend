@@ -7,16 +7,22 @@ import TransactionsList from './components/TransactionsList';
 function App() {
   return (
     <Router>
-      <nav style={{ padding: '10px', background: '#f4f4f4' }}>
-        <Link to="/" style={{ marginRight: '15px' }}>Dashboard</Link>
-        <Link to="/add" style={{ marginRight: '15px' }}>Yeni İşlem</Link>
-        <Link to="/transactions">Tüm İşlemler</Link>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 mb-3">
+        <Link className="navbar-brand" to="/">Muhasebe</Link>
+        <div className="navbar-nav">
+          <Link className="nav-link" to="/">Dashboard</Link>
+          <Link className="nav-link" to="/add">Yeni İşlem</Link>
+          <Link className="nav-link" to="/transactions">Tüm İşlemler</Link>
+        </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/add" element={<AddTransaction />} />
-        <Route path="/transactions" element={<TransactionsList />} />
-      </Routes>
+
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/add" element={<AddTransaction />} />
+          <Route path="/transactions" element={<TransactionsList />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

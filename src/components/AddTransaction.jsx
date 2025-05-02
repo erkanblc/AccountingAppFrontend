@@ -27,39 +27,40 @@ function AddTransaction() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: '20px' }}>
-      <h2>Yeni İşlem</h2>
+    <div className="card p-4">
+      <h2 className="mb-3">Yeni İşlem</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Tür:</label>
+          <select className="form-select" value={type} onChange={e => setType(e.target.value)} required>
+            <option value="INCOME">Gelir</option>
+            <option value="EXPENSE">Gider</option>
+          </select>
+        </div>
 
-      <div>
-        <label>Tür:</label>
-        <select value={type} onChange={e => setType(e.target.value)} required>
-          <option value="INCOME">Gelir</option>
-          <option value="EXPENSE">Gider</option>
-        </select>
-      </div>
+        <div className="mb-3">
+          <label className="form-label">Kategori:</label>
+          <input className="form-control" type="text" value={category} onChange={e => setCategory(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Kategori:</label>
-        <input type="text" value={category} onChange={e => setCategory(e.target.value)} required />
-      </div>
+        <div className="mb-3">
+          <label className="form-label">Tutar:</label>
+          <input className="form-control" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Tutar:</label>
-        <input type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
-      </div>
+        <div className="mb-3">
+          <label className="form-label">Açıklama:</label>
+          <input className="form-control" type="text" value={description} onChange={e => setDescription(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Açıklama:</label>
-        <input type="text" value={description} onChange={e => setDescription(e.target.value)} required />
-      </div>
+        <div className="mb-3">
+          <label className="form-label">Tarih:</label>
+          <input className="form-control" type="date" value={date} onChange={e => setDate(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Tarih:</label>
-        <input type="date" value={date} onChange={e => setDate(e.target.value)} required />
-      </div>
-
-      <button type="submit" style={{ marginTop: '10px' }}>Kaydet</button>
-    </form>
+        <button type="submit" className="btn btn-success">Kaydet</button>
+      </form>
+    </div>
   );
 }
 

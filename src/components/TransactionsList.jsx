@@ -14,21 +14,20 @@ function TransactionsList() {
   };
 
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Bu işlemi silmek istediğinize emin misiniz?");
-    if (confirmDelete) {
+    if (window.confirm("Bu işlemi silmek istediğinize emin misiniz?")) {
       fetch(`http://localhost:8080/api/transactions/${id}`, {
         method: 'DELETE'
       })
-      .then(() => fetchTransactions())
-      .catch(err => alert("Silme hatası: " + err));
+        .then(() => fetchTransactions())
+        .catch(err => alert("Silme hatası: " + err));
     }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h2>Tüm İşlemler</h2>
-      <table border="1" cellPadding="5" cellSpacing="0">
-        <thead>
+      <table className="table table-striped table-bordered mt-3">
+        <thead className="table-dark">
           <tr>
             <th>Tarih</th>
             <th>Tür</th>
@@ -47,7 +46,7 @@ function TransactionsList() {
               <td>{t.description}</td>
               <td>{t.amount} ₺</td>
               <td>
-                <button onClick={() => handleDelete(t.id)} style={{ color: 'red' }}>❌</button>
+                <button onClick={() => handleDelete(t.id)} className="btn btn-sm btn-danger">❌</button>
               </td>
             </tr>
           ))}

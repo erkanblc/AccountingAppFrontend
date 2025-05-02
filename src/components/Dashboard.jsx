@@ -15,20 +15,36 @@ function Dashboard() {
   const recent = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Dashboard</h2>
-      <p>Toplam Gelir: {income.toFixed(2)} ₺</p>
-      <p>Toplam Gider: {expense.toFixed(2)} ₺</p>
-      <p>Net Bakiye: {balance.toFixed(2)} ₺</p>
+    <div className="row">
+      <div className="col-md-4 mb-3">
+        <div className="card text-white bg-success p-3">
+          <h5>Toplam Gelir</h5>
+          <h4>{income.toFixed(2)} ₺</h4>
+        </div>
+      </div>
+      <div className="col-md-4 mb-3">
+        <div className="card text-white bg-danger p-3">
+          <h5>Toplam Gider</h5>
+          <h4>{expense.toFixed(2)} ₺</h4>
+        </div>
+      </div>
+      <div className="col-md-4 mb-3">
+        <div className="card text-white bg-primary p-3">
+          <h5>Net Bakiye</h5>
+          <h4>{balance.toFixed(2)} ₺</h4>
+        </div>
+      </div>
 
-      <h3>Son 5 İşlem</h3>
-      <ul>
-        {recent.map(t => (
-          <li key={t.id}>
-            {t.date} - {t.type === 'INCOME' ? 'Gelir' : 'Gider'} - {t.category} - {t.amount} ₺
-          </li>
-        ))}
-      </ul>
+      <div className="col-12">
+        <h3>Son 5 İşlem</h3>
+        <ul className="list-group">
+          {recent.map(t => (
+            <li key={t.id} className="list-group-item">
+              {t.date} - {t.category} - {t.amount} ₺
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
